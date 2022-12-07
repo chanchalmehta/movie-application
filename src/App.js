@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
 import axios from "axios";
+import Searchfilter from "./Searchfilter"; 
 
 function App() {
-  const [text, setText] = useState("search movie");
+  const [text, setText] = useState("");
 
   const [movie, setMovie] = useState([]);
   //  const fetchMovie=()=>{
@@ -18,7 +19,7 @@ function App() {
   };
   const getMovie = (e) => {
     e.preventDefault();
-    axios.get("https://www.omdbapi.com/?s=hit&apikey=7fbf596f")
+  axios.get(`https://www.omdbapi.com/?s=${text}&apikey=7fbf596f`)
       .then((response) => {
         console.log(response);
         setMovie(response.data.Search);
@@ -44,32 +45,9 @@ function App() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link
-                </a>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </a>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="navbarDropdown"
-                ></ul>
-              </li>
+              
+              
+              
             </ul>
             <form className="d-flex" onSubmit={getMovie}>
               <input
@@ -100,10 +78,13 @@ function App() {
                   </div>
                 </div>
               </div>
+              
             );
           })}
         </div>
       </div>
+      
+      <Searchfilter/>
     </>
   );
 }
